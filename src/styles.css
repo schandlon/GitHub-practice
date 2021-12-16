@@ -15,6 +15,15 @@ li {
   line-height: 1;
   list-style: none;
 }
+
+h1 {
+  color: #444141;
+  font-size: 28px;
+  font-weight: 200;
+  line-height: 28.8px;
+  margin-bottom: 0;
+}
+
 .temperature {
   color: rgb(33, 33, 33);
   font-size: 64px;
@@ -30,12 +39,4 @@ li {
   padding: 20px;
   border: 1px solid #dadde1;
   border-radius: 5px;
-}
-
-h1 {
-  color: #444141;
-  font-size: 28px;
-  font-weight: 200;
-  line-height: 28.8px;
-  margin-bottom: 0;
 }
