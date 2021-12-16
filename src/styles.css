@@ -31,3 +31,11 @@ li {
   border: 1px solid #dadde1;
   border-radius: 5px;
 }
+
+h1 {
+  color: #444141;
+  font-size: 28px;
+  font-weight: 200;
+  line-height: 28.8px;
+  margin-bottom: 0;
+}
