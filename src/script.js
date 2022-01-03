@@ -23,6 +23,29 @@ function formatDate(date) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function diplayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  forecastElement.innerHTML = `
+    <div class="row">
+      <div class="col-2">
+        <div class="weather-forecast-date">Sun</div>
+        <img 
+          src="http://openweathermap.org/img/wn/04n@2x.png" 
+          alt="" 
+          width="42"
+        />
+        <div class="weather-forecast-temperatures">
+          <span class="weather-forecast-max"> 36° </
+          span>
+          <span class="weather-forecast-min"> 26° </
+          span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function showWeatherConditions(response) {
   console.log(response.data);
   document.querySelector("#city").innerHTML = response.data.name;
@@ -87,3 +110,5 @@ let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
 searchCity("North Bend");
+
+displayForecast();
