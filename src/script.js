@@ -23,21 +23,24 @@ function formatDate(date) {
   return `${day} ${hours}:${minutes}`;
 }
 
-function diplayForecast() {
+function displayForecast(response) {
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
 
+  let days = ["Tues", "Wed", "Thu", "Fri"];
+
   let forecastHTML = `<div class="row">`;
-  forecastHTML =
-    forecastHTML +
-    `
-    <div class="row">
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
       <div class="col-2">
-        <div class="weather-forecast-date">Sun</div>
+        <div class="weather-forecast-date">${day}</div>
         <img 
-          src="http://openweathermap.org/img/wn/04n@2x.png" 
-          alt="" 
-          width="42"
-        />
+        src="http://openweathermap.org/img/wn/04n@2x.png" 
+        alt="" 
+        width="42"
+    />
         <div class="weather-forecast-temperatures">
           <span class="weather-forecast-max"> 36° </
           span>
@@ -45,30 +48,21 @@ function diplayForecast() {
           span>
         </div>
       </div>
-    </div>
+    
   `;
-  forecastHTML =
-    forecast +
-    `
-    <div class="row">
-      <div class="col-2">
-        <div class="weather-forecast-date">Sun</div>
-        <img 
-          src="http://openweathermap.org/img/wn/04n@2x.png" 
-          alt="" 
-          width="42"
-        />
-        <div class="weather-forecast-temperatures">
-          <span class="weather-forecast-max"> 36° </
-          span>
-          <span class="weather-forecast-min"> 26° </
-          span>
-        </div>
-      </div>
-    </div>
-    `;
-  forecastHTML = `</div>`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
+  console.log(forecastHTML);
+}
+
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "e4799330ffe003d2d7f69849dc03f789";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function showWeatherConditions(response) {
@@ -93,6 +87,8 @@ function showWeatherConditions(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  getForecast(response.data.coord);
 }
 
 function searchCity(city) {
@@ -135,5 +131,3 @@ let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
 searchCity("North Bend");
-
-displayForecast();
